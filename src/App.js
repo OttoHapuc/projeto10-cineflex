@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
 import styled from 'styled-components';
-import { Link } from "react-router-dom";
 import axios from "axios";
-import { useParams } from "react-router-dom"
 
-import TopSection from "./components/topSection";
+import Site1 from "./webs/pgInicial"
+import Secoes from "./webs/secoes"
 function App() {
   const [filmes, setFilme] = useState(undefined);
   const [site, setSite] = useState(1);
+
+  const [filmeEscolhido, setFilmeEscolhido] = useState({})
+  const [escolheu, setEscolheu] = useState("não")
 
   useEffect(() => {
     const promise = axios.get(`https://mock-api.driven.com.br/api/v8/cineflex/movies`)
@@ -30,12 +32,20 @@ function App() {
         {(site ===3) && "Selecione o(s) assento(s)"}
         {(site ===4) && "Pedido feito com sucesso"}
       </Div>
-      {(site === 1) && <div>
-        <Wrapper>
-          {filmes.map((filme) => <TopSection key={filme.id} filme={filme} />)}
-        </Wrapper>
-      </div>
-      }
+      <Site1 
+      filmes={filmes} 
+      site={site} 
+      setSite={setSite}
+      setFilmeEscolhido={setFilmeEscolhido}
+      setEscolheu={setEscolheu}
+      />
+      <Secoes 
+      site={site} 
+      filmeEscolhido={filmeEscolhido} 
+      setFilmeEscolhido={setFilmeEscolhido}
+      filmes={filmes}
+      escolheu={escolheu}
+      />
     </div>
   );
 };
@@ -72,12 +82,4 @@ font-size: 24px;
 line-height: 28px;
 text-align: center;
   color: ${prop => (prop.site==4) ? "#247A6B":"#293845"};
-`
-const Wrapper = styled.div`
-margin-top: 20px;
-display: flex;
-flex-wrap: wrap;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
 `

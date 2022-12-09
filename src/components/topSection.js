@@ -1,7 +1,14 @@
 import styled from 'styled-components';
-export default function TopSection({filme}){
+export default function TopSection({filme, id, setFilmeEscolhido, setSite, setEscolheu}){
+
+  function escolhido(id){
+    const novoObjeto= {id: id};
+    setFilmeEscolhido(novoObjeto)
+    setSite(2)
+    setEscolheu("sim")
+  }
     return(
-        <ToppSection data-test="movie">
+        <ToppSection onClick={()=> escolhido(id)} data-test="movie">
           <Image>
             <img src={filme.posterURL} alt={filme.name} />
           </Image>
