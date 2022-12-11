@@ -1,11 +1,17 @@
 import styled from "styled-components"
 
-export default function DiasEHorarios({f}){
+export default function DiasEHorarios({setSite,  f, filmeEscolhido, setFilmeEscolhido}){
+
+    function paginaDeAssentos(horario){
+        const novoObj= {...filmeEscolhido, horario: horario}
+        setFilmeEscolhido(novoObj)
+        setSite(3)
+    }
     return(
         <Aqui>
         <p>{f.weekday} - {f.date}</p>
-        <button >{f.showtimes[0].name}</button>
-        <button >{f.showtimes[1].name}</button>
+        <button onClick={()=>paginaDeAssentos(f.showtimes[0].name)}>{f.showtimes[0].name}</button>
+        <button onClick={()=>paginaDeAssentos(f.showtimes[1].name)}>{f.showtimes[1].name}</button>
         </Aqui>
     )
 }

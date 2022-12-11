@@ -2,7 +2,7 @@ import styled from "styled-components"
 import { useEffect, useState } from "react"
 import axios from "axios";
 import DiasEHorarios from "../components/diasEHorarios"
-export default function Secoes({ site, filmes, filmeEscolhido, setFilmeEscolhido, escolheu }) {
+export default function Secoes({ site, setSite, filmes, filmeEscolhido, setFilmeEscolhido, escolheu }) {
 
     const [filme, setFilme] = useState(undefined)
     useEffect(() => {
@@ -20,7 +20,14 @@ export default function Secoes({ site, filmes, filmeEscolhido, setFilmeEscolhido
     return (
         <>{(site === 2 && filme !== undefined) &&
             <SecoesDeHorarios>
-                {filme.days.map((f) => <DiasEHorarios key={f.id} f={f} />)}
+                {filme.days.map((f) => <DiasEHorarios 
+                    key={f.id} 
+                    site={site}
+                    setSite={setSite}
+                    f={f} 
+                    filmeEscolhido={filmeEscolhido}
+                    setFilmeEscolhido={setFilmeEscolhido}
+                    />)}
             </SecoesDeHorarios>}
             {(site === 2 && filme !== undefined) && <Fundo>
                 <Image>
@@ -49,7 +56,7 @@ const Fundo = styled.div`
 display: flex;
 align-items: center;
 position: fixed;
-width: 375px;
+width: 100%;
 height: 117px;
 left: 0px;
 bottom: 0px;

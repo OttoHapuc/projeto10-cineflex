@@ -41,6 +41,7 @@ function App() {
       />
       <Secoes 
       site={site} 
+      setSite={setSite}
       filmeEscolhido={filmeEscolhido} 
       setFilmeEscolhido={setFilmeEscolhido}
       filmes={filmes}
