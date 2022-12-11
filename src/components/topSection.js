@@ -2,7 +2,7 @@ import styled from 'styled-components';
 export default function TopSection({filme, id, setFilmeEscolhido, setSite, setEscolheu}){
 
   function escolhido(id){
-    const novoObjeto= {id: id};
+    const novoObjeto= {id: id, URL: filme.posterURL, titulo: filme.title};
     setFilmeEscolhido(novoObjeto)
     setSite(2)
     setEscolheu("sim")
