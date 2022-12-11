@@ -2,16 +2,16 @@ import styled from "styled-components"
 import { useEffect, useState } from "react"
 import axios from "axios";
 import DiasEHorarios from "../components/diasEHorarios"
-export default function Secoes({ site, setSite, filmes, filmeEscolhido, setFilmeEscolhido, escolheu }) {
+export default function Secoes({ site, setSite, filmes, filmeEscolhido, setFilmeEscolhido  }) {
 
-    const [filme, setFilme] = useState(undefined)
+    const [filme, sethorarios] = useState(undefined)
     useEffect(() => {
         if (site === 2) {
             const promise = axios.get(`https://mock-api.driven.com.br/api/v8/cineflex/movies/${filmeEscolhido.id}/showtimes`)
-            promise.then((res) => setFilme(res.data))
+            promise.then((res) => sethorarios(res.data))
             promise.catch((err) => console.log(err.response.data))
         }
-    }, [escolheu])
+    }, [site])
 
     if (filmes === undefined) {
         return <Carregando>Carregando...</Carregando>
@@ -19,7 +19,7 @@ export default function Secoes({ site, setSite, filmes, filmeEscolhido, setFilme
 
     return (
         <>{(site === 2 && filme !== undefined) &&
-            <SecoesDeHorarios>
+            <SecoesDeHorarios data-test="movie-day" >
                 {filme.days.map((f) => <DiasEHorarios 
                     key={f.id} 
                     site={site}
@@ -29,7 +29,7 @@ export default function Secoes({ site, setSite, filmes, filmeEscolhido, setFilme
                     setFilmeEscolhido={setFilmeEscolhido}
                     />)}
             </SecoesDeHorarios>}
-            {(site === 2 && filme !== undefined) && <Fundo>
+            {(site === 2 && filme !== undefined) && <Fundo data-test="footer">
                 <Image>
                     <img src={filmeEscolhido.URL} alt={filmeEscolhido.titulo} />
                 </Image>
