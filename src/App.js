@@ -5,6 +5,7 @@ import axios from "axios";
 import Site1 from "./webs/pgInicial"
 import Secoes from "./webs/secoes"
 import Assentos from "./webs/escolhaDeAssentos"
+import FimDePedido from "./webs/finalizacaoDePedido"
 function App() {
   const [filmes, setFilme] = useState(undefined);
   const [site, setSite] = useState(1);
@@ -49,14 +50,17 @@ function App() {
       escolheu={escolheu}
       setEscolheu={setEscolheu}
       />
-      <Assentos
+      {site === 3 && <Assentos
       site={site}
       setSite={setSite}
       filmeEscolhido={filmeEscolhido}
       setFilmeEscolhido={setFilmeEscolhido}
       escolheu={escolheu}
       setEscolheu={setEscolheu}
-      />
+      />}
+      {site === 4 && <FimDePedido
+      filmeEscolhido={filmeEscolhido}
+      />}
     </div>
   );
 };

@@ -3,7 +3,7 @@ import styled from "styled-components"
 export default function DiasEHorarios({setSite,  f, filmeEscolhido, setFilmeEscolhido}){
 
     function paginaDeAssentos(horario, id){
-        const novoObj= {...filmeEscolhido, dia: f.weekday, horario: horario, idDeSessao: id}
+        const novoObj= {...filmeEscolhido, dia: f.weekday, data: f.date, horario: horario, idDeSessao: id}
         setFilmeEscolhido(novoObj)
         setSite(3)
     }
